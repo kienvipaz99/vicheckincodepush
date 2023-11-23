@@ -8,6 +8,7 @@ import store from '../redux/store';
 import Container from './Container';
 import Notification from '../component/modal/Notification';
 import {getFCMToken} from '../utils/pushnotification_helper';
+import codePush from 'react-native-code-push';
 let persistor = persistStore(store);
 const App = () => {
   const [notification, setNotification] = React.useState<any>();
@@ -52,4 +53,9 @@ const App = () => {
   );
 };
 
-export default App;
+let codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  installMode: codePush.InstallMode.IMMEDIATE,
+};
+
+export default codePush(codePushOptions)(App);

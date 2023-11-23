@@ -25,7 +25,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CodePushDeploymentKey</key>
-	<string>3ef67696-092f-4408-a4e3-459a6e27524d</string>
+	<string>f093cb1b-3b4a-41e8-b929-dd0f8e6d3c4f</string>
 	<key>LSApplicationCategoryType</key>
 	<string>$(PRODUCT_NAME) Bật quyền truy cập vị trí để chấm công</string>
 	<key>LSRequiresIPhoneOS</key>
