@@ -15,7 +15,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		17547A26DD174BF693B90FC0 /* GoogleSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 482AEE3413EE43A284770ADC /* GoogleSans-MediumItalic.ttf */; };
 		5D5FA1C2DB0E422E9E9B54D9 /* GoogleSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 725032909130488388D883A0 /* GoogleSans-BoldItalic.ttf */; };
-		74949CA52A52A56A00F967D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74949CA42A52A56A00F967D3 /* GoogleService-Info.plist */; };
+		74A0610C2B11958D0005507E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74A0610B2B11958D0005507E /* GoogleService-Info.plist */; };
 		74E91E2D299E24EE009C4AC5 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74E91E2C299E24ED009C4AC5 /* AppCenter-Config.plist */; };
 		74F6E4C0297425C90012011C /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74F6E4B0297425C80012011C /* Fontisto.ttf */; };
 		74F6E4C1297425C90012011C /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74F6E4B1297425C80012011C /* Octicons.ttf */; };
@@ -71,7 +71,7 @@
 		725032909130488388D883A0 /* GoogleSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-BoldItalic.ttf"; path = "../assets/fonts/GoogleSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		74277532298A453A00FFBF60 /* testRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = testRelease.entitlements; path = test/testRelease.entitlements; sourceTree = "<group>"; };
 		747965DC29CCC54D009DAC20 /* test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = test.entitlements; path = test/test.entitlements; sourceTree = "<group>"; };
-		74949CA42A52A56A00F967D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		74A0610B2B11958D0005507E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../notifivicheckin/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74E91E2C299E24ED009C4AC5 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		74F6E4B0297425C80012011C /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		74F6E4B1297425C80012011C /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
@@ -159,8 +159,8 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				74949CA42A52A56A00F967D3 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				74A0610B2B11958D0005507E /* GoogleService-Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -375,7 +375,7 @@
 			files = (
 				74F6E4C1297425C90012011C /* Octicons.ttf in Resources */,
 				74F6E4CD297425C90012011C /* EvilIcons.ttf in Resources */,
-				74949CA52A52A56A00F967D3 /* GoogleService-Info.plist in Resources */,
+				74A0610C2B11958D0005507E /* GoogleService-Info.plist in Resources */,
 				74F6E4C7297425C90012011C /* Foundation.ttf in Resources */,
 				74F6E4C3297425C90012011C /* Entypo.ttf in Resources */,
 				74F6E4C2297425C90012011C /* Feather.ttf in Resources */,

@@ -8,10 +8,9 @@ import store from '../redux/store';
 import Container from './Container';
 import Notification from '../component/modal/Notification';
 import {getFCMToken} from '../utils/pushnotification_helper';
-<<<<<<< HEAD
-=======
+
 import codePush from 'react-native-code-push';
->>>>>>> 460b3e1 (kien)
+
 let persistor = persistStore(store);
 const App = () => {
   const [notification, setNotification] = React.useState<any>();

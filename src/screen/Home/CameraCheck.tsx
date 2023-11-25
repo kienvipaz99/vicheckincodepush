@@ -7,7 +7,6 @@ import sizes from '../../res/sizes';
 import images from '../../res/images';
 import fonts from '../../res/fonts';
 // import {checkin} from '../../redux/state/Data';
-
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import URI_FACE, {config} from '../../URI_FACE';
