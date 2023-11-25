@@ -1,0 +1,15 @@
+/node_modules
+/build
+/coverage
+/out
+/.next
+
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+
+/__tests__
+/.bundle
+/android
+/ios
