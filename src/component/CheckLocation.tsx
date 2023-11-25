@@ -43,9 +43,6 @@ const CheckLocation = (props: Props) => {
         width: sizes._230sdp,
         borderRadius: sizes._160sdp,
       }}
-      onPress={() => {
-        props.navigation.navigate('Chấm công');
-      }}
       activeOpacity={0.7}>
       <ImageBackground
         source={images.logovitech}

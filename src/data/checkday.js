@@ -87,6 +87,16 @@ export function checknumberdayval(val) {
   let fullday = nam + '-' + thangs + '-' + ngays;
   return fullday;
 }
+export function checknumberdayval2() {
+  let curr = new Date();
+  let thang = curr.getMonth() + 1;
+  let nam = curr.getFullYear();
+  let ngay = curr.getDate();
+  let thangs = thang < 10 ? '0' + thang : thang;
+  let ngays = ngay < 10 ? '0' + ngay : ngay;
+  let fullday = nam + '-' + thangs + '-' + ngays;
+  return fullday;
+}
 export function gettime(val) {
   let a = new Date(val).getHours();
   let b = new Date(val).getMinutes();
@@ -100,6 +110,14 @@ export function gettimesss(val) {
   let hour = a < 10 ? '0' + a : a;
   let minute = b < 10 ? '0' + b : b;
   return hour + ':' + minute;
+}
+export function gettimesss1(val) {
+  let a = new Date(val).getUTCHours();
+  let b = new Date(val).getUTCMinutes();
+  let hour = a < 10 ? '0' + a : a;
+  let minute = b < 10 ? '0' + b : b;
+  let day = fullday(val);
+  return hour + ':' + minute + '  ' + day;
 }
 export function gettimes() {
   let a = new Date().getHours();

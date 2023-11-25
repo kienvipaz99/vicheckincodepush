@@ -43,7 +43,6 @@ const TaoLichHop = (props: TaoLichHopProps) => {
         start_date: timeStart,
         end_date: timeEnd,
       }).unwrap();
-      console.log(creat);
     } catch (error) {
       console.log(error);
     }

@@ -66,35 +66,28 @@ const ModalRequest = ({
             style={styles.textinput}
             onChangeText={setSearch}
             value={search}
-            onPressIn={() => setshowsearch(true)}
             cursorColor={colors.colorText}
             selectionColor={colors.colorText}
-            editable={showsearch}
           />
         )}
 
-        {data?.data?.length !== 0 && showsearch && (
+        {data?.data?.length !== 0 && (
           <View style={styles.view2}>
-            {isLoading ? (
-              <ActivityIndicator size={'large'} />
-            ) : (
-              <ScrollView showsVerticalScrollIndicator={false}>
-                {data?.data?.map((item: User) => {
-                  return (
-                    <Pressable
-                      key={'cccc' + item?.id}
-                      style={styles.btn}
-                      onPress={() => {
-                        setSearch(item?.full_name);
-                        pickid(item?.id);
-                        setshowsearch(false);
-                      }}>
-                      <Text>{item?.full_name}</Text>
-                    </Pressable>
-                  );
-                })}
-              </ScrollView>
-            )}
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {data?.data?.map((item: User) => {
+                return (
+                  <Pressable
+                    key={'cccc' + item?.id}
+                    style={styles.btn}
+                    onPress={() => {
+                      setSearch(item?.full_name);
+                      pickid(item?.id);
+                    }}>
+                    <Text>{item?.full_name}</Text>
+                  </Pressable>
+                );
+              })}
+            </ScrollView>
           </View>
         )}
 

@@ -11,6 +11,7 @@ import {
 import {ActivityIndicator} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import stylescustom from '../../res/stylescustom';
+import {checknumberdayval2} from '../../data/checkday';
 interface Props {
   item: any;
   navigation: NavigationProp<Record<string, any>>;
@@ -18,7 +19,9 @@ interface Props {
 
 const RenderChamCong = (props: Props) => {
   const {data} = useGetdashBoardonWorkingQuery('');
-  const {data: getAttendanceSumary} = useGetAttendanceSumaryDailyQuery('');
+  const {data: getAttendanceSumary} = useGetAttendanceSumaryDailyQuery({
+    day: checknumberdayval2(),
+  });
   const disom = getAttendanceSumary?.data.filter((item: any) => {
     return item.behavior === 'early';
   });

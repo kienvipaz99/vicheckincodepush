@@ -62,27 +62,27 @@ export default function TopTab(props: Props) {
 const styles = StyleSheet.create({
   view: {
     backgroundColor: '#f4f4f4',
-    height: 40,
     borderRadius: 60,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     ...stylescustom.shadowitem,
+    height: 45,
   },
   view1: {
-    height: 40,
     backgroundColor: '#69bc45',
     borderRadius: 60,
     width: (sizes._screen_width * 0.9) / 3,
     alignItems: 'center',
     justifyContent: 'center',
+    height: 45,
   },
   view3: {
-    height: 40,
     borderRadius: 60,
     width: (sizes._screen_width * 0.9) / 3,
     alignItems: 'center',
     justifyContent: 'center',
+    height: 45,
   },
   view2: {
     flexDirection: 'row',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   txt: {
-    fontSize: sizes.width * 0.045,
+    fontSize: 16,
     fontFamily: fonts.textBold,
     color: colors.colorText,
   },

@@ -8,7 +8,7 @@ import sizes from '../../res/sizes';
 import colors from '../../res/color';
 import fonts from '../../res/fonts';
 import {addKey} from '../../redux/state/keytoken';
-import {UserID} from '../../redux/state/infoUser';
+import {RoleUser, UserID} from '../../redux/state/infoUser';
 import {NavigationProp} from '@react-navigation/native';
 import {axiosAuth} from '../../redux/api/axiosClient';
 import {
@@ -58,9 +58,11 @@ const Login = ({navigation}: {navigation: NavigationProp<Record<string, any>>}) 
         }).unwrap();
         const dataa = datas as verifytoken;
         dispatch(UserID(dataa?.id));
+
         await updateFCMToken(dataa.id, fcm);
         const roles = dataa?.roles[0];
-        if (roles?.id === 1) {
+        dispatch(RoleUser(roles?.id));
+        if (roles?.id === 1 || roles?.id === 2) {
           navigation.navigate('ButtonTabBarAdmin');
         } else {
           navigation.navigate('Home1');

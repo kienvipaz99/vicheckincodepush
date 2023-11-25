@@ -11,12 +11,13 @@ import {dateTime} from '../data/checkday';
 import Loading from '../component/Loading';
 import HTML from 'react-native-render-html';
 import {NavigationProp} from '@react-navigation/native';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
 export default function Notification(props: Props) {
   const [per_page, setPer_Page] = useState(10);
-
   const {data, isLoading, refetch, isFetching} = useGetNotificationQuery({
     per_page: per_page,
   });
@@ -24,10 +25,25 @@ export default function Notification(props: Props) {
     setPer_Page(per_page + 10);
     refetch();
   };
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const role = useAppSelect(data => data?.infoUser?.role);
+
+  const Click = (link: string) => {
+    if (link.includes('leave')) {
+      if (role === 1 || role === 2) {
+        props.navigation.navigate('SingleWordsss');
+      } else {
+        props.navigation.navigate('RequestManagement');
+      }
+    } else if (link.includes('attendances')) {
+    } else {
+      console.log('Đây không phải là trang leave hoặc attendances.');
+    }
+  };
   const renderItem = ({item}: {item: Notifications}) => {
     return (
       <>
-        <Pressable style={styles.view1}>
+        <Pressable style={styles.view1} onPress={() => Click(item?.data?.url)}>
           <Image
             source={images.logo}
             style={styles.view2}
@@ -36,7 +52,6 @@ export default function Notification(props: Props) {
           />
           <View style={styles.view3}>
             <HTML source={{html: item?.data?.message.toUpperCase()}} contentWidth={sizes.width} />
-
             <Text style={styles.txt3}>{dateTime(item?.updated_at)}</Text>
           </View>
         </Pressable>
@@ -53,8 +68,6 @@ export default function Notification(props: Props) {
         back
         onBackPress={() => props.navigation.goBack()}
         rightContent
-        save
-        opPressSave={() => {}}
       />
 
       <View style={stylescustom.contentContainer}>

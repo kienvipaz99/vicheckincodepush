@@ -113,7 +113,6 @@ export default function NhanVien(props: Props) {
           id: data?.id,
           uuid: create.data?.uuid,
         });
-        console.log(uploadUuid);
         if (uploadUuid) {
           setShow2(true);
           timeoutIdRef.current = setTimeout(() => {

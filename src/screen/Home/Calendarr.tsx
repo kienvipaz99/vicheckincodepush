@@ -1,11 +1,9 @@
-import React, {useEffect, useState, useMemo} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import Header from '../../component/Header';
 import sizes from '../../res/sizes';
 import DateWord from '../../component/DateWord';
-import BuntomCustom1 from '../../component/BuntomCustom1';
 import {NavigationProp} from '@react-navigation/native';
-
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }

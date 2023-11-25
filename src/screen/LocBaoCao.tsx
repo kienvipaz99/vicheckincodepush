@@ -23,7 +23,6 @@ const d = new Date();
 
 let yy = d.getFullYear();
 let mm = d.getMonth() + 1;
-console.log(yy, mm);
 
 const LocBaoCao = (props: LocBaoCaoProps) => {
   const {MD, MM} = props.route?.params?.day;

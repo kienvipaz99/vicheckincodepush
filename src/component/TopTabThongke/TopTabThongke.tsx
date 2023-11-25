@@ -11,6 +11,7 @@ import {
   useGetAttendanceSumaryDailyQuery,
   useGetdashBoardonWorkingQuery,
 } from '../../redux/api/auth.api';
+import {checknumberdayval2} from '../../data/checkday';
 interface Props {
   number: number;
 }
@@ -20,7 +21,9 @@ export default function TopTabThongke(props: Props) {
   const [chuacheckin, SetChuaCheckIn] = React.useState<notAttended[]>();
   const [nghi, setNghi] = React.useState<notAttended[]>();
   const [vesom, setVeSom] = React.useState<notAttended[]>();
-  const {data} = useGetAttendanceSumaryDailyQuery('');
+  const {data} = useGetAttendanceSumaryDailyQuery({
+    day: checknumberdayval2(),
+  });
   const {data: dataDasBoad} = useGetdashBoardonWorkingQuery('');
 
   useEffect(() => {
@@ -29,8 +32,9 @@ export default function TopTabThongke(props: Props) {
         return item?.behavior === 'late';
       });
       let bbb = data?.data.filter((item: getAttendanceSumary) => {
-        return item?.behavior === 'early';
+        return item?.behavior === 'early' || item?.behavior === 'regular';
       });
+
       setDataDiSom(bbb);
       setDaTaDiMuon(aaa);
     }
@@ -50,7 +54,6 @@ export default function TopTabThongke(props: Props) {
     {key: 'gapkhach', title: 'Gặp khách hàng'},
   ]);
   const [index, setIndex] = React.useState(props.number);
-
   const renderScene = ({route, jumpTo}: any) => {
     switch (route.key) {
       case 'chuacheck':

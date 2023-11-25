@@ -92,9 +92,7 @@ export default function BaoCaoChamCong(props: Props) {
     const key = item?.in_date;
     keyedData[key] = [item];
   });
-
   const {data: leaves} = useLeavesAllowancesQuery(`${id}`);
-
   return (
     <View style={stylescustom.container}>
       <Header
@@ -130,7 +128,6 @@ export default function BaoCaoChamCong(props: Props) {
                 <Image source={images.loc} style={styles.icon1} />
               </TouchableOpacity>
             </View>
-
             <Calendar
               style={[styles.view1, stylescustom.shadowitem]}
               hideExtraDays={true}

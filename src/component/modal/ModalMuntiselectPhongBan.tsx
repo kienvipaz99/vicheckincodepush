@@ -47,8 +47,6 @@ const ModalMuntiselectPhongBan = (props: Props) => {
   };
 
   const renderitem = ({item, index}: any) => {
-    console.log(item);
-
     return (
       <TouchableOpacity
         style={styles.view}

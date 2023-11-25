@@ -3,7 +3,6 @@ import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import colors from '../../res/color';
 import fonts from '../../res/fonts';
 import sizes from '../../res/sizes';
-import stylescustom from '../../res/stylescustom';
 interface Props {
   name: any;
   img: any;
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    ...stylescustom.shadowitem,
   },
   text: {
     color: colors.colorblack,

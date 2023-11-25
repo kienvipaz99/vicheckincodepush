@@ -6,8 +6,7 @@ import {useCameraDevices} from 'react-native-vision-camera';
 import sizes from '../../res/sizes';
 import images from '../../res/images';
 import fonts from '../../res/fonts';
-import {checkin} from '../../redux/state/Data';
-
+// import {checkin} from '../../redux/state/Data';
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import URI_FACE, {config} from '../../URI_FACE';
@@ -37,13 +36,13 @@ const CameraCheck = (props: ChamCongProps) => {
         const photo = await camera.current.takePhoto({
           skipMetadata: true,
         });
-        dispatch(checkin('file://' + photo.path));
+        // dispatch(checkin('file://' + photo.path));
       } else {
         const photo = await camera.current.takeSnapshot({
           quality: 85,
           skipMetadata: true,
         });
-        dispatch(checkin('file://' + photo.path));
+        // dispatch(checkin('file://' + photo.path));
         const item = {
           uri: 'file://' + photo.path,
           type: 'image/jpeg',

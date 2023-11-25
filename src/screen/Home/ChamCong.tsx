@@ -19,7 +19,6 @@ const ChamCong = (props: ChamCongProps) => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const id = useAppSelect(data => data?.infoUser?.id);
   const {data} = useEmployeeQuery(`${id}`);
-  const image = useAppSelect(data => data?.data?.imageCheckin);
   return (
     <View style={styles.container}>
       <Header title textTittle={'CHẤM CÔNG'} back onBackPress={() => props.navigation.goBack()} />
@@ -27,7 +26,7 @@ const ChamCong = (props: ChamCongProps) => {
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => props.navigation.navigate('CameraCheck', {uuid: data?.uuid})}>
-          {image == '' ? (
+          {/* {image == '' ? (
             <Image
               style={{
                 height: sizes._screen_width * 0.6,
@@ -46,7 +45,7 @@ const ChamCong = (props: ChamCongProps) => {
               }}
               source={{uri: image}}
             />
-          )}
+          )} */}
         </TouchableOpacity>
 
         <Text style={styles.txt}>
@@ -56,7 +55,7 @@ const ChamCong = (props: ChamCongProps) => {
           <View style={{alignItems: 'center'}}>
             <Image source={images.cancel} style={styles.img} />
 
-            {image ? (
+            {/* {image ? (
               <>
                 {props.route?.params === 'success' ? (
                   <Text style={styles.txt1}>Bạn là kiên</Text>
@@ -66,10 +65,10 @@ const ChamCong = (props: ChamCongProps) => {
               </>
             ) : (
               <Text style={styles.txt1}>Bạn chưa checkin</Text>
-            )}
+            )} */}
 
             <Text style={{fontFamily: fonts.textRegular, color: 'black'}}>
-              {image ? gettimes() : '--:--'}
+              {/* {image ? gettimes() : '--:--'} */}
             </Text>
           </View>
         </View>

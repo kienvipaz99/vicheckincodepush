@@ -142,9 +142,9 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
-    getAttendanceSumaryDaily: build.query<ListApiResponse<getAttendanceSumary>, string>({
-      query: () => ({
-        url: '/api/v1/attendanceDaily',
+    getAttendanceSumaryDaily: build.query<ListApiResponse<getAttendanceSumary>, {day: string}>({
+      query: ({day}) => ({
+        url: `/api/v1/attendanceDaily?date=${day}&per_page=300`,
         method: 'GET',
       }),
       providesTags: result => {
