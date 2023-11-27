@@ -6,7 +6,7 @@ import sizes from '../../res/sizes';
 
 interface DanhSachThamGiaProps {
   item: any;
-  index: any;
+  index: number;
 }
 
 const DanhSachThamGia = (props: DanhSachThamGiaProps) => {

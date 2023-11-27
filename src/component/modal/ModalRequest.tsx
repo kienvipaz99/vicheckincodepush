@@ -61,34 +61,35 @@ const ModalRequest = ({
       </View>
       <View style={styles.view}>
         {searchitem && (
-          <TextInput
-            placeholder="Tìm kiếm nhân viên"
-            style={styles.textinput}
-            onChangeText={setSearch}
-            value={search}
-            cursorColor={colors.colorText}
-            selectionColor={colors.colorText}
-          />
-        )}
-
-        {data?.data?.length !== 0 && (
-          <View style={styles.view2}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {data?.data?.map((item: User) => {
-                return (
-                  <Pressable
-                    key={'cccc' + item?.id}
-                    style={styles.btn}
-                    onPress={() => {
-                      setSearch(item?.full_name);
-                      pickid(item?.id);
-                    }}>
-                    <Text>{item?.full_name}</Text>
-                  </Pressable>
-                );
-              })}
-            </ScrollView>
-          </View>
+          <>
+            <TextInput
+              placeholder="Tìm kiếm nhân viên"
+              style={styles.textinput}
+              onChangeText={setSearch}
+              value={search}
+              cursorColor={colors.colorText}
+              selectionColor={colors.colorText}
+            />
+            {data?.data?.length !== 0 && (
+              <View style={styles.view2}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  {data?.data?.map((item: User) => {
+                    return (
+                      <Pressable
+                        key={'cccc' + item?.id}
+                        style={styles.btn}
+                        onPress={() => {
+                          setSearch(item?.full_name);
+                          pickid(item?.id);
+                        }}>
+                        <Text>{item?.full_name}</Text>
+                      </Pressable>
+                    );
+                  })}
+                </ScrollView>
+              </View>
+            )}
+          </>
         )}
 
         <FlatList

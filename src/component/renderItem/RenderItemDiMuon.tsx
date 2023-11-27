@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, ImageBackground, Image, FlatList} from 'react-native';
 import fonts from '../../res/fonts';
 import images from '../../res/images';

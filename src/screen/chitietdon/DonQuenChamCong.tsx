@@ -13,10 +13,6 @@ interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
-interface calamtype {
-  id: number;
-  name: string;
-}
 export default function DonQuenChamCong(props: Props) {
   const {ngaygui, lido, time, noidung} = props.route?.params;
   const [noidungs, setNoiDungs] = useState(noidung);

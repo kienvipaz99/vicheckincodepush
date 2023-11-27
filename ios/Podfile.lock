@@ -599,11 +599,7 @@ PODS:
     - React-perflogger (= 0.70.2)
   - ReactNativeGetLocation (2.2.1):
     - React-Core
-<<<<<<< HEAD
-  - RNCAsyncStorage (1.19.5):
-=======
   - RNCAsyncStorage (1.19.6):
->>>>>>> 67d6625
     - React-Core
   - RNDateTimePicker (6.7.5):
     - React-Core
@@ -1035,11 +1031,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 80065f60af4f4b05603661070c8622bb3740bf16
   ReactCommon: 1209130f460e4aa9d255ddc75fa0a827ebf93dfb
   ReactNativeGetLocation: d6b15cb2a2023ab7703f756501bad86d3ecf6fea
-<<<<<<< HEAD
-  RNCAsyncStorage: f2974eca860c16a3e56eea5771fda8d12e2d2057
-=======
   RNCAsyncStorage: 191a99459b4a6d174cfe51579d34b5267201bbf3
->>>>>>> 67d6625
   RNDateTimePicker: 65e1d202799460b286ff5e741d8baf54695e8abd
   RNFBApp: b43d4829366a5065e17f9af3b03a0c4890eaeb85
   RNFBMessaging: 1b55308131dc7e4cca6b22deb5067f1fdb55f768

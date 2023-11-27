@@ -103,13 +103,7 @@ export default class Header extends Component<Props, State> {
               onPress={() => this.props.onBackPress()}
             />
           )}
-          <View
-            style={{
-              justifyContent: 'center',
-              width: sizes._screen_width,
-              alignItems: 'center',
-              position: 'absolute',
-            }}>
+          <View style={styles.view}>
             {title && <Text style={[styles.titleContent]}>{textTittle}</Text>}
           </View>
 
@@ -128,17 +122,10 @@ export default class Header extends Component<Props, State> {
                       onPress={this.props.onnotifications}
                     />
                     {lenghtnotifi === 0 ? null : (
-                      <View
-                        style={{
-                          backgroundColor: 'red',
-                          height: 25,
-                          width: 25,
-                          borderRadius: 30,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          top: -8,
-                        }}>
-                        <Text style={{color: 'white', fontSize: 20}}>{lenghtnotifi}</Text>
+                      <View style={styles.notifi}>
+                        <Text style={{color: 'white', fontSize: 20, fontFamily: fonts.textRegular}}>
+                          {lenghtnotifi}
+                        </Text>
                       </View>
                     )}
                   </View>
@@ -162,14 +149,7 @@ export default class Header extends Component<Props, State> {
                   <TouchableOpacity
                     onPress={() => opressChon()}
                     style={{marginRight: sizes._15sdp}}>
-                    <Text
-                      style={{
-                        color: 'white',
-                        fontSize: sizes._font_size_big_big,
-                        fontWeight: '500',
-                      }}>
-                      Chọn
-                    </Text>
+                    <Text style={styles.txt}>Chọn</Text>
                   </TouchableOpacity>
                 )}
                 {iconadd && (
@@ -276,5 +256,25 @@ const styles = StyleSheet.create({
   },
   iconCenter: {
     left: sizes._8sdp,
+  },
+  view: {
+    justifyContent: 'center',
+    width: sizes._screen_width,
+    alignItems: 'center',
+    position: 'absolute',
+  },
+  notifi: {
+    backgroundColor: 'red',
+    height: 25,
+    width: 25,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: -8,
+  },
+  txt: {
+    color: 'white',
+    fontSize: sizes._font_size_big_big,
+    fontFamily: fonts.textRegular,
   },
 });

@@ -11,8 +11,6 @@ import BuntomCustom1 from '../../component/BuntomCustom1';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {checknumberdayval, consvertTime, gettimesss} from '../../data/checkday';
 import {NavigationProp} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {useCreataddAtendeeMutation} from '../../redux/api/auth.api';
@@ -23,6 +21,8 @@ interface Props {
 }
 export default function QuenChamCong(props: Props) {
   const [showNgay, setShowNgay] = useState(false);
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const id = useAppSelect(data => data?.infoUser?.id);
   const [days, setDays] = useState('');
   const [shownhanvien, setShowNhanVien] = useState(false);
   const [nhanvien, setNhanVien] = useState<any>('');
@@ -37,11 +37,12 @@ export default function QuenChamCong(props: Props) {
     in_time: '',
     out_time: '',
   });
+
   const Submit = async () => {
     try {
       const aa = await addAtendee({
         in_date: days,
-        employee_id: nhanvien?.id,
+        employee_id: id,
         in_time: time,
         out_time: times,
       }).unwrap();
@@ -86,17 +87,6 @@ export default function QuenChamCong(props: Props) {
       <View style={stylescustom.contentContainer}>
         <ScrollView style={{width: '100%', flex: 1}}>
           <View style={styles.container}>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => {
-                {
-                  setShowNhanVien(true);
-                }
-              }}>
-              <Text style={styles.txt1}>{nhanvien ? nhanvien.full_name : 'Chọn nhân viên'}</Text>
-              <Icon name="user" size={30} color={'black'} style={{marginRight: 8}} />
-            </TouchableOpacity>
-            {errors?.employee_id && <Text style={stylescustom.err}>{errors?.employee_id}</Text>}
             <Text style={styles.txt}>Thời gian quên chấm công:</Text>
 
             <TouchableOpacity

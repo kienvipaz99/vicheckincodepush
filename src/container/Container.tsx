@@ -73,6 +73,7 @@ import DonGapKhachHang from '../screen/chitietdon/DonGapKhachHang';
 import DonQuenChamCong from '../screen/chitietdon/DonQuenChamCong';
 import DonDimuonVeSom from '../screen/chitietdon/DonDimuonVeSom';
 import DonXinNghiPhep from '../screen/chitietdon/DonXinNghiPhep';
+import TopTabQuenChamCong from '../screen/dontu/quenchamcong/TopTabQuenChamCong';
 const Stack = createNativeStackNavigator();
 function Container() {
   const dispatch = useDispatch();
@@ -172,10 +173,12 @@ function Container() {
         <Stack.Screen name="TangCa" component={TangCa} />
         <Stack.Screen name="NhanVien" component={NhanVien} />
         <Stack.Screen name="SuaChucVu" component={SuaChucVu} />
+        {/*@ts-ignore*/}
         <Stack.Screen name="DonGapKhachHang" component={DonGapKhachHang} />
         <Stack.Screen name="DonQuenChamCong" component={DonQuenChamCong} />
         <Stack.Screen name="DonDimuonVeSom" component={DonDimuonVeSom} />
         <Stack.Screen name="DonXinNghiPhep" component={DonXinNghiPhep} />
+        <Stack.Screen name="TopTabQuenChamCong" component={TopTabQuenChamCong} />
       </Stack.Navigator>
       <ModalCheckinternet isShow={open1}></ModalCheckinternet>
       <ModalOpenSettingWifi show1={open} toggleDate={() => setOpen(false)}></ModalOpenSettingWifi>

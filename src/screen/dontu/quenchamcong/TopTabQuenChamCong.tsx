@@ -1,90 +1,37 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
+import Header from '../../../component/Header';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
-import WaitForApprival from '../screen/request/WaitForApprival';
-import sizes from '../res/sizes';
+
+import stylescustom from '../../../res/stylescustom';
+import TopTabYeuCau from '../../../container/TopTabYeuCau';
+import fonts from '../../../res/fonts';
+import sizes from '../../../res/sizes';
 import {TabView, TabBar} from 'react-native-tab-view';
-import colors from '../res/color';
-// import {chapthuan, tuchoi} from '../data/feckData/dontu';
-import fonts from '../res/fonts';
-import stylescustom from '../res/stylescustom';
-import {useGetYeucauQuery, useRequestStatusQuery} from '../redux/api/auth.api';
-import Loading from '../component/Loading';
+import {useAttendancesRequestQuery} from '../../../redux/api/auth.api';
+import RequestChamcong from './RequestChamcong';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
-import {RootState} from '../redux/store';
-interface Props {
-  navigation: NavigationProp<Record<string, any>>;
-  fillter: string;
-  pickid?: number;
-}
-export default function TopTabYeuCau(props: Props) {
+import {RootState} from '../../../redux/store';
+
+const TopTabQuenChamCong = ({navigation}: {navigation: NavigationProp<Record<string, any>>}) => {
+  const {data} = useAttendancesRequestQuery('');
   const [routes] = React.useState([
     {key: 'yeucau1', title: 'Yêu cầu'},
     {key: 'chapthuan1', title: 'Chấp thuận'},
     {key: 'tuchoi1', title: 'Từ chối'},
   ]);
-  const [index, setIndex] = React.useState(0);
-  const {data, isLoading, refetch} = useGetYeucauQuery(
-    {
-      per_page: 100,
-    },
-    {
-      refetchOnFocus: true,
-      pollingInterval: 10000,
-    },
-  );
-  useEffect(() => {
-    const unsubscribe = props.navigation.addListener('focus', () => {
-      refetch();
-      refetchRequset();
-    });
-    return unsubscribe;
-  }, [props.navigation]);
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const id = useAppSelect(data => data?.infoUser?.id);
-  const {
-    data: dataRequset,
-    isLoading: LoadingRequest,
-    refetch: refetchRequset,
-  } = useRequestStatusQuery({
-    id: props.pickid ? props.pickid : id,
-    params: `within=${props?.fillter}`,
-  });
-  const daduyet = dataRequset?.data.filter(
-    (item: LeaveReQuest) => item?.status?.class === 'success',
-  );
-  const tuchoi = dataRequset?.data.filter((item: LeaveReQuest) => item?.status?.class === 'danger');
-
+  const [index, setIndex] = React.useState(0);
   const renderScene = ({route, jumpTo}: any) => {
     switch (route.key) {
       case 'yeucau1':
-        return (
-          <WaitForApprival
-            data={data?.data}
-            color={'orange'}
-            status="Yêu cầu"
-            navigation={props.navigation}
-          />
-        );
+        return <RequestChamcong data={data?.data} />;
 
       case 'chapthuan1':
-        return (
-          <WaitForApprival
-            data={daduyet}
-            color={colors.colorBlue}
-            status="Chấp thuận"
-            navigation={props.navigation}
-          />
-        );
+        return <></>;
       case 'tuchoi1':
-        return (
-          <WaitForApprival
-            data={tuchoi}
-            color={'red'}
-            status="Từ chối"
-            navigation={props.navigation}
-          />
-        );
+        return <></>;
       default:
         return null;
     }
@@ -110,7 +57,7 @@ export default function TopTabYeuCau(props: Props) {
                   color: focused ? '#1352ae' : '#9a9a9a',
                   fontFamily: fonts.textRegular,
                 }}>
-                {data?.total && `(${data?.total})`}
+                {/* {data?.total && `(${data?.total})`} */}
               </Text>
             )}
 
@@ -141,21 +88,31 @@ export default function TopTabYeuCau(props: Props) {
   );
 
   return (
-    <NavigationContainer independent={true}>
-      <TabView
-        swipeEnabled={true}
-        navigationState={{index, routes}}
-        renderScene={renderScene}
-        renderTabBar={renderHeader}
-        onIndexChange={(index: number) => {
-          setIndex(index);
-        }}
-      />
-      {(LoadingRequest || isLoading) && <Loading />}
-    </NavigationContainer>
+    <View style={styles.conteiner}>
+      <Header back onBackPress={() => navigation.goBack()} title textTittle={'Quên chấm công'} />
+      <View style={stylescustom.contentContainer}>
+        <NavigationContainer independent={true}>
+          <TabView
+            swipeEnabled={true}
+            navigationState={{index, routes}}
+            renderScene={renderScene}
+            renderTabBar={renderHeader}
+            onIndexChange={(index: number) => {
+              setIndex(index);
+            }}
+          />
+        </NavigationContainer>
+      </View>
+    </View>
   );
-}
+};
+
+export default TopTabQuenChamCong;
+
 const styles = StyleSheet.create({
+  conteiner: {
+    flex: 1,
+  },
   item1: {flexDirection: 'row', alignItems: 'center'},
   item2: {
     height: 20,

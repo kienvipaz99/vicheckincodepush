@@ -5,7 +5,7 @@ import IconCalender from 'react-native-vector-icons/FontAwesome';
 import IconSimpe from 'react-native-vector-icons/SimpleLineIcons';
 
 interface Props {
-  name: any;
+  name: string;
   icon: string;
   navigation: () => void;
 }

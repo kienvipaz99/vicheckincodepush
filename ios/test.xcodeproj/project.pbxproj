@@ -665,7 +665,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "";
-				"MARKETING_VERSION[sdk=iphoneos*]" = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

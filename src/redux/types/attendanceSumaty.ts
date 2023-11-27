@@ -47,3 +47,63 @@ interface AddAtendee {
   in_time: string;
   out_time: string;
 }
+interface detailatendance {
+  id: number;
+  in_time: string;
+  out_time: string;
+  attendance_id: number;
+  status_id: number;
+  review_by: number;
+  attendance_details_id: null;
+  comments: [
+    {
+      id: number;
+      user_id: number;
+      type: string;
+      comment: string;
+      parent_id: null;
+    },
+  ];
+  status: {
+    id: number;
+    name: string;
+    class: string;
+    translated_name: string;
+  };
+}
+interface attendanceRequest {
+  id: number;
+  in_date: string;
+  user_id: number;
+  status_id: number;
+  working_shift_id: number;
+  behavior: string;
+  tenant_id: number;
+  created_at: string;
+  updated_at: string;
+  user: {
+    id: number;
+    first_name: string;
+    last_name: string;
+    status_id: number;
+    full_name: string;
+    department: {
+      id: number;
+      name: string;
+      pivot: {
+        user_id: number;
+        department_id: number;
+        start_date: string;
+        end_date: string;
+      };
+    };
+    profile_picture: null;
+    status: {
+      id: number;
+      name: string;
+      class: string;
+      translated_name: string;
+    };
+  };
+  details: detailatendance[];
+}

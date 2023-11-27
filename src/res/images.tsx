@@ -90,7 +90,7 @@ const images = {
   sach8: require('../assets/images/sach8.jpg'),
   sach9: require('../assets/images/sach9.jpg'),
   slap: require('../assets/images/slap.jpg'),
-  slogan_thu_hut_khach_hang2: require('../assets/images/slogan-thu-hut-khach-hang2.png'),
+
   star: require('../assets/images/star.png'),
   sua: require('../assets/images/sua.png'),
   tangca: require('../assets/images/tangca.png'),

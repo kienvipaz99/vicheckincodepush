@@ -484,6 +484,15 @@ export const authApi = createApi({
         };
       },
     }),
+    attendancesRequest: build.query<ListApiResponse<attendanceRequest>, string>({
+      query: () => ({
+        method: 'GET',
+        url: `/api/v1/attendances/request`,
+      }),
+      providesTags: () => {
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 export const {
@@ -531,4 +540,5 @@ export const {
   useRequestStatusQuery,
   useLogRequestQuery,
   useCreataddAtendeeMutation,
+  useAttendancesRequestQuery,
 } = authApi;

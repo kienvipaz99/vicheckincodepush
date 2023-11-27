@@ -37,26 +37,9 @@ const CheckLocation = (props: Props) => {
   }, []);
 
   return (
-    <TouchableOpacity
-      style={{
-        height: sizes._230sdp,
-        width: sizes._230sdp,
-        borderRadius: sizes._160sdp,
-      }}
-      activeOpacity={0.7}>
-      <ImageBackground
-        source={images.logovitech}
-        style={{
-          height: sizes._230sdp,
-          width: sizes._230sdp,
-          borderRadius: sizes._160sdp,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Image
-          source={images.address}
-          style={{height: 35, width: 35, tintColor: 'white', marginBottom: 10}}
-        />
+    <TouchableOpacity style={styles.view} activeOpacity={0.7}>
+      <ImageBackground source={images.logovitech} style={styles.img}>
+        <Image source={images.address} style={styles.img1} />
 
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           {vido == vido && kinhdo == kinhdo ? (
@@ -86,5 +69,18 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: fonts.textBold,
     fontSize: sizes._font_size_max_max,
+  },
+  img: {
+    height: sizes._230sdp,
+    width: sizes._230sdp,
+    borderRadius: sizes._160sdp,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  img1: {height: 35, width: 35, tintColor: 'white', marginBottom: 10},
+  view: {
+    height: sizes._230sdp,
+    width: sizes._230sdp,
+    borderRadius: sizes._160sdp,
   },
 });

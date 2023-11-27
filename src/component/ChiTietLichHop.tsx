@@ -16,7 +16,7 @@ interface ChiTietLichHopProps {
 }
 
 const ChiTietLichHop = (props: ChiTietLichHopProps) => {
-  let a = props.route.params.item;
+  let a = props.route?.params?.item;
 
   return (
     <View style={stylescustom.container}>

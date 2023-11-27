@@ -60,14 +60,6 @@ const itemtrangchu = {
     //   background: '#f3f9e7',
     //   color: '#8ac111',
     // },
-    // {
-    //   id: 8,
-    //   name: 'Quên chấm công',
-    //   navigation: 'QuenChamCong',
-    //   img: images.clock,
-    //   background: '#fff5e6',
-    //   color: '',
-    // },
 
     {
       id: 9,
@@ -78,12 +70,12 @@ const itemtrangchu = {
       color: '#00d7e2',
     },
     // {
-    //   id: 10,
-    //   name: 'Đơn tăng ca',
-    //   navigation: 'TangCa',
-    //   img: images.tangca,
-    //   background: '#f0efff',
-    //   color: '#6e5fff',
+    //   id: 8,
+    //   name: 'Quên chấm công',
+    //   navigation: 'TopTabQuenChamCong',
+    //   img: images.clock,
+    //   background: '#fff5e6',
+    //   color: 'orange',
     // },
     {
       id: 11,

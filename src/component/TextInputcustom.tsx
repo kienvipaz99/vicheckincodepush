@@ -7,7 +7,7 @@ import colors from '../res/color';
 interface Props {
   value?: string;
   setValue: (value: string) => void;
-  placeholder?: any;
+  placeholder?: string;
   icon: string;
   muntiline?: boolean;
   numberOfLines?: number;
