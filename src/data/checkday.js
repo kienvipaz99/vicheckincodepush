@@ -111,13 +111,22 @@ export function gettimesss(val) {
   let minute = b < 10 ? '0' + b : b;
   return hour + ':' + minute;
 }
+
 export function gettimesss1(val) {
   let a = new Date(val).getUTCHours();
   let b = new Date(val).getUTCMinutes();
   let hour = a < 10 ? '0' + a : a;
   let minute = b < 10 ? '0' + b : b;
-  let day = fullday(val);
-  return hour + ':' + minute + '  ' + day;
+  let day = checknumberdayval(val);
+  return day + ' ' + hour + ':' + minute + ':' + '00';
+}
+export function gettimesss2(val) {
+  let a = new Date(val).getUTCHours();
+  let b = new Date(val).getUTCMinutes();
+  let hour = a < 10 ? '0' + a : a;
+  let minute = b < 10 ? '0' + b : b;
+  let day = checknumberdayval(val);
+  return day + hour + ':' + minute + ':' + '00';
 }
 export function gettimes() {
   let a = new Date().getHours();
@@ -171,7 +180,18 @@ export function consvertTime(val) {
   let phuts = phut < 10 ? '0' + phut : phut;
   return gios + ':' + phuts;
 }
-
+export function consvertTime1(val) {
+  if (!val) {
+    return '--:--';
+  }
+  const gio1 = val.split(' ')[1];
+  const date = new Date(`2023-01-01T${gio1}Z`);
+  const gio = date.getHours();
+  let phut = date.getMinutes();
+  let gios = gio < 10 ? '0' + gio : gio;
+  let phuts = phut < 10 ? '0' + phut : phut;
+  return gios + ':' + phuts;
+}
 export function consvertTimeToday(val) {
   var dateString = val;
   var dateObj = new Date(dateString);

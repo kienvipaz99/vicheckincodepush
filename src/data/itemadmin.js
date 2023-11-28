@@ -64,8 +64,8 @@ const itemadmin = {
     },
     {
       id: 11,
-      name: 'Thêm chấm công',
-      navigation: 'QuenChamCong',
+      name: 'Quản lý chấm công',
+      navigation: 'TopTabQuenChamCongAdmin',
       img: images.clock,
       background: '#e2f2fe',
       color: '#2fa7ff',

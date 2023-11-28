@@ -139,22 +139,7 @@ export default function DuyetDon(props: Props) {
                 <Text style={styles.txt12}>Kết thúc: {HouseMinute(item?.end_at)}</Text>
               </View>
             </View>
-            {item?.type?.name === 'Đơn đi gặp đối tác' && (
-              <View style={[styles.item4, stylescustom.shadowitem]}>
-                <View style={stylescustom.row1}>
-                  <Feather
-                    name="map-pin"
-                    size={20}
-                    color={colors.colorIcon}
-                    style={{marginLeft: 12}}
-                  />
-                  <Text style={styles.txt1}>Địa chỉ</Text>
-                </View>
-                <View style={styles.view1}>
-                  <Text style={styles.txt12}>{item?.location}</Text>
-                </View>
-              </View>
-            )}
+
             <View style={[styles.item4, stylescustom.shadowitem]}>
               <View style={stylescustom.row1}>
                 <Foundation

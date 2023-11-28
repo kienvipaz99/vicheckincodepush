@@ -46,6 +46,7 @@ interface AddAtendee {
   in_date: string;
   in_time: string;
   out_time: string;
+  note: string;
 }
 interface detailatendance {
   id: number;

@@ -9,13 +9,19 @@ import images from '../../res/images';
 import TextInputCustoms from '../../component/TextInputCustoms';
 import BuntomCustom1 from '../../component/BuntomCustom1';
 import {NavigationProp} from '@react-navigation/native';
+import {chuyenDoiThoiGian} from '../../data/checkday';
+import ModalTextInput from '../../component/modal/ModalTextInput';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
 export default function DonQuenChamCong(props: Props) {
-  const {ngaygui, lido, time, noidung} = props.route?.params;
-  const [noidungs, setNoiDungs] = useState(noidung);
+  const {in_date, details} = props.route?.params?.item as attendanceRequest;
+  const [noidungs, setNoiDungs] = useState(details[0]?.comments[0]?.comment);
+  const {duyetdon} = props.route?.params;
+  const [phanhoi, setPhanhoi] = useState<'huỷ' | 'duyệt'>();
+  const [show, setShow] = useState(false);
+
   return (
     <View style={{flex: 1}}>
       <Header
@@ -29,17 +35,19 @@ export default function DonQuenChamCong(props: Props) {
           <View style={styles.container}>
             <Text style={styles.txt}>Thời gian quên chấm công:</Text>
             <TouchableOpacity style={styles.btn}>
-              <Text style={styles.txt1}>{lido}</Text>
+              <Text style={styles.txt1}>{in_date}</Text>
               <Image source={images.note} style={styles.img} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.txt1}>{ngaygui}</Text>
-              <Image source={images.calendar} style={styles.img} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btn2}>
-              <Text style={styles.txt1}>{time}</Text>
-              <Image source={images.clock1} style={styles.img} />
-            </TouchableOpacity>
+            <View style={stylescustom.row2}>
+              <TouchableOpacity style={styles.btn2}>
+                <Text style={styles.txt1}>{chuyenDoiThoiGian(details[0]?.in_time)}</Text>
+                <Image source={images.clock1} style={styles.img} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn2}>
+                <Text style={styles.txt1}>{chuyenDoiThoiGian(details[0]?.out_time)}</Text>
+                <Image source={images.clock1} style={styles.img} />
+              </TouchableOpacity>
+            </View>
             <Text style={[styles.txt, {marginTop: sizes._30sdp}]}>Lý do bạn quên chấm công:</Text>
             <TextInputCustoms
               type={true}
@@ -47,13 +55,41 @@ export default function DonQuenChamCong(props: Props) {
               placeholder="Nội dung"
               value={noidungs}
               setValue={setNoiDungs}
+              editable={false}
             />
-            <View style={styles.btn1}>
-              <BuntomCustom1 text="Gửi yêu cầu" onpress={() => {}} />
-            </View>
+
+            {duyetdon && (
+              <View style={styles.btn1}>
+                <BuntomCustom1
+                  text="Duyệt đơn"
+                  onpress={() => {
+                    setShow(true);
+                    setPhanhoi('duyệt');
+                  }}
+                />
+              </View>
+            )}
+            {duyetdon && (
+              <View style={styles.btn1}>
+                <BuntomCustom1
+                  text="Huỷ đơn"
+                  onpress={() => {
+                    setShow(true);
+                    setPhanhoi('huỷ');
+                  }}
+                />
+              </View>
+            )}
           </View>
         </ScrollView>
       </View>
+      <ModalTextInput
+        navigation={props.navigation}
+        isShow={show}
+        toggleDate={() => setShow(false)}
+        title={phanhoi}
+        id={details[0]?.id}
+      />
     </View>
   );
 }
@@ -88,7 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: sizes.width * 0.45,
+    width: sizes.width * 0.4,
     alignSelf: 'flex-end',
   },
   txt1: {

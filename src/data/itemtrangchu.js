@@ -69,14 +69,14 @@ const itemtrangchu = {
       background: '#e0fbfc',
       color: '#00d7e2',
     },
-    // {
-    //   id: 8,
-    //   name: 'Quên chấm công',
-    //   navigation: 'TopTabQuenChamCong',
-    //   img: images.clock,
-    //   background: '#fff5e6',
-    //   color: 'orange',
-    // },
+    {
+      id: 8,
+      name: 'Quên chấm công',
+      navigation: 'TopTabQuenChamCong',
+      img: images.clock,
+      background: '#fff5e6',
+      color: 'orange',
+    },
     {
       id: 11,
       name: 'Xin nghỉ phép',

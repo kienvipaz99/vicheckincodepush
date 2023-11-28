@@ -487,10 +487,31 @@ export const authApi = createApi({
     attendancesRequest: build.query<ListApiResponse<attendanceRequest>, string>({
       query: () => ({
         method: 'GET',
-        url: `/api/v1/attendances/request`,
+        url: `/api/v1/attendances/request?per_page=1000`,
       }),
       providesTags: () => {
         return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    attendancesRequestReject: build.query<ListApiResponse<attendanceRequest>, string>({
+      query: () => ({
+        method: 'GET',
+        url: `/api/v1/attendances/request?per_page=1000&rejected=true`,
+      }),
+      providesTags: () => {
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    Feedbackattendances: build.mutation<
+      success,
+      {id: number; data: attendancesfeedback; status: string}
+    >({
+      query({id, data, status}) {
+        return {
+          url: `/api/v1/attendances/${id}/status/${status}`,
+          method: 'POST',
+          data,
+        };
       },
     }),
   }),
@@ -541,4 +562,6 @@ export const {
   useLogRequestQuery,
   useCreataddAtendeeMutation,
   useAttendancesRequestQuery,
+  useAttendancesRequestRejectQuery,
+  useFeedbackattendancesMutation,
 } = authApi;

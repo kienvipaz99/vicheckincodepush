@@ -9,12 +9,18 @@ import images from '../../res/images';
 import TextInputCustoms from '../../component/TextInputCustoms';
 import BuntomCustom1 from '../../component/BuntomCustom1';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {checknumberdayval, consvertTime, gettimesss} from '../../data/checkday';
+import {
+  checknumberdayval,
+  consvertTime,
+  consvertTime1,
+  gettimesss,
+  gettimesss1,
+  gettimesss2,
+} from '../../data/checkday';
 import {NavigationProp} from '@react-navigation/native';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {useCreataddAtendeeMutation} from '../../redux/api/auth.api';
-import Modalselectuser from '../../component/modal/Modalselectuser';
 import {vietsuberrors} from '../../data/vietsub/vietsuberrors';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
@@ -24,8 +30,6 @@ export default function QuenChamCong(props: Props) {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const id = useAppSelect(data => data?.infoUser?.id);
   const [days, setDays] = useState('');
-  const [shownhanvien, setShowNhanVien] = useState(false);
-  const [nhanvien, setNhanVien] = useState<any>('');
   const [time, setTime] = useState('');
   const [showtime, setShowTime] = useState(false);
   const [times, setTimes] = useState('');
@@ -37,7 +41,7 @@ export default function QuenChamCong(props: Props) {
     in_time: '',
     out_time: '',
   });
-
+  const [note, setNote] = useState('');
   const Submit = async () => {
     try {
       const aa = await addAtendee({
@@ -45,6 +49,7 @@ export default function QuenChamCong(props: Props) {
         employee_id: id,
         in_time: time,
         out_time: times,
+        note: note,
       }).unwrap();
       Alert.alert(
         'Thông báo',
@@ -61,7 +66,7 @@ export default function QuenChamCong(props: Props) {
       );
     } catch (error: any) {
       const err = error?.data?.errors;
-      console.log(err);
+      console.log(error, '123');
 
       if (error?.status == 403) {
         Alert.alert(error?.data?.message);
@@ -106,7 +111,7 @@ export default function QuenChamCong(props: Props) {
                   onPress={() => {
                     setShowTime(true);
                   }}>
-                  <Text style={styles.txt1}>{consvertTime(time)}</Text>
+                  <Text style={styles.txt1}>{consvertTime1(time)}</Text>
                   <Image source={images.clock1} style={styles.img} />
                 </TouchableOpacity>
                 {errors?.in_time && <Text style={stylescustom.err}>{errors?.in_time}</Text>}
@@ -118,13 +123,19 @@ export default function QuenChamCong(props: Props) {
                   onPress={() => {
                     setShowTimes(true);
                   }}>
-                  <Text style={styles.txt1}>{consvertTime(times)}</Text>
+                  <Text style={styles.txt1}>{consvertTime1(times)}</Text>
                   <Image source={images.clock1} style={styles.img} />
                 </TouchableOpacity>
                 {errors?.out_time && <Text style={stylescustom.err}>{errors?.out_time}</Text>}
               </View>
             </View>
-
+            <TextInputCustoms
+              type={true}
+              img={images.note}
+              placeholder="Nội dung"
+              value={note}
+              setValue={setNote}
+            />
             <View style={styles.btn1}>
               <BuntomCustom1 text="Gửi yêu cầu" onpress={Submit} isLoading={isLoading} />
             </View>
@@ -143,30 +154,21 @@ export default function QuenChamCong(props: Props) {
       />
       <DateTimePickerModal
         isVisible={showtime}
-        mode="time"
+        mode="datetime"
         onConfirm={(ab: Date) => {
-          setTime(gettimesss(ab));
+          setTime(gettimesss1(ab));
           setShowTime(false);
         }}
         onCancel={() => setShowTime(false)}
       />
       <DateTimePickerModal
         isVisible={showtimes}
-        mode="time"
+        mode="datetime"
         onConfirm={(ab: Date) => {
-          setTimes(gettimesss(ab));
+          setTimes(gettimesss1(ab));
           setShowTimes(false);
         }}
         onCancel={() => setShowTimes(false)}
-      />
-      <Modalselectuser
-        isShow={shownhanvien}
-        name={'Chọn nhân viên'}
-        toggleDate={() => setShowNhanVien(false)}
-        search
-        select={(val: any) => {
-          setNhanVien(val);
-        }}
       />
     </View>
   );

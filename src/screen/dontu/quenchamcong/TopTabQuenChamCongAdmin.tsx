@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import Header from '../../../component/Header';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
+
 import stylescustom from '../../../res/stylescustom';
 import fonts from '../../../res/fonts';
 import sizes from '../../../res/sizes';
@@ -11,17 +12,19 @@ import {
   useAttendancesRequestRejectQuery,
 } from '../../../redux/api/auth.api';
 import RequestChamcong from './RequestChamcong';
-import {TypedUseSelectorHook, useSelector} from 'react-redux';
-import {RootState} from '../../../redux/store';
 import Loading from '../../../component/Loading';
-const TopTabQuenChamCong = ({navigation}: {navigation: NavigationProp<Record<string, any>>}) => {
+
+const TopTabQuenChamCongAdmin = ({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) => {
   const {data, refetch, isLoading} = useAttendancesRequestQuery('');
   const {
     data: dataReject,
     refetch: refetchReject,
     isLoading: loadingReject,
   } = useAttendancesRequestRejectQuery('');
-
   const [routes] = React.useState([
     {key: 'yeucau1', title: 'Yêu cầu'},
     {key: 'tuchoi1', title: 'Từ chối'},
@@ -33,18 +36,16 @@ const TopTabQuenChamCong = ({navigation}: {navigation: NavigationProp<Record<str
     });
     return unsubscribe;
   }, [navigation]);
-  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
-  const id = useAppSelect(data => data?.infoUser?.id);
-  const yeucau = data?.data.filter((item: attendanceRequest) => item?.user_id === id);
-  const tuchoi = dataReject?.data.filter((item: attendanceRequest) => item?.user_id === id);
   const [index, setIndex] = React.useState(0);
   const renderScene = ({route, jumpTo}: any) => {
     switch (route.key) {
       case 'yeucau1':
-        return <RequestChamcong data={yeucau} status="yêu cầu" navigation={navigation} />;
+        return (
+          <RequestChamcong data={data?.data} status="yêu cầu" navigation={navigation} duyetdon />
+        );
 
       case 'tuchoi1':
-        return <RequestChamcong data={tuchoi} status="từ chối" navigation={navigation} />;
+        return <RequestChamcong data={dataReject?.data} status="từ chối" navigation={navigation} />;
       default:
         return null;
     }
@@ -123,13 +124,13 @@ const TopTabQuenChamCong = ({navigation}: {navigation: NavigationProp<Record<str
             }}
           />
         </NavigationContainer>
+        {(isLoading || loadingReject) && <Loading />}
       </View>
-      {(isLoading || loadingReject) && <Loading />}
     </View>
   );
 };
 
-export default TopTabQuenChamCong;
+export default TopTabQuenChamCongAdmin;
 
 const styles = StyleSheet.create({
   conteiner: {

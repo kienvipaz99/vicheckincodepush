@@ -81,13 +81,6 @@ const DonGapKhachHang = (props: XinGapKhachProps) => {
             />
 
             <TextInputCustoms
-              img={images.map}
-              placeholder="Địa chỉ"
-              value={diachi}
-              setValue={() => {}}
-              editable={false}
-            />
-            <TextInputCustoms
               type
               img={images.note}
               placeholder="Nội dung"

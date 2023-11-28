@@ -8,3 +8,6 @@ interface success {
   message: string;
   status: boolean;
 }
+interface attendancesfeedback {
+  status_name: string;
+}
