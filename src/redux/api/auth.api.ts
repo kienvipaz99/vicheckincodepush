@@ -396,6 +396,8 @@ export const authApi = createApi({
     }),
     createonleave: build.mutation<success, OnLeave>({
       query(data) {
+        console.log(data);
+
         return {
           url: '/api/v1/leaves/assign',
           method: 'POST',

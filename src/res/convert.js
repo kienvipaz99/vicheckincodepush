@@ -77,6 +77,13 @@ export function txt(val) {
     return val?.substring(0, 22) + '...';
   }
 }
+export function txt1(val) {
+  if (val?.length < 15) {
+    return val;
+  } else {
+    return val?.substring(0, 13) + '...';
+  }
+}
 export function isDay(ngay) {
   switch (ngay) {
     case 1:
@@ -121,4 +128,17 @@ export const getLeaveType1 = loaiNghiPhep => {
 };
 export const colorStatus = val => {
   return val === 'Đã phê duyệt' ? colors.colorGreen : val === 'Đã từ chối' ? 'red' : 'orange';
+};
+export const dayWeeks = day => {
+  let curent = new Date(day);
+  let month = curent.getMonth() + 1;
+  let year = curent.getFullYear();
+  let numberday = new Date(year, month, 0).getDate();
+  let week = [];
+  for (let i = 1; i <= numberday; i++) {
+    let ngay = i;
+    let fullday = year + '-' + month + '-' + ngay;
+    week.push(fullday);
+  }
+  return week;
 };

@@ -3,6 +3,7 @@ interface User {
   first_name: string;
   last_name: string;
   work: number;
+  isChecked: boolean;
   in_time_late: number;
   out_time_early: number;
   department: {

@@ -35,6 +35,8 @@ export default function TextInputcustom(props: Props) {
         style={props.muntiline ? styles.texinput1 : styles.text}
         multiline={props.muntiline}
         numberOfLines={props.numberOfLines}
+        cursorColor={colors.colorText}
+        selectionColor={colors.colorText}
       />
     </View>
   );
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
+    paddingHorizontal: 8,
   },
   btn3: {
     borderRadius: sizes._10sdp,
@@ -68,11 +70,12 @@ const styles = StyleSheet.create({
     height: 150,
     alignItems: 'flex-start',
     padding: 8,
+    alignContent: 'flex-start',
   },
   text: {
     color: colors.colorText,
     fontFamily: fonts.textRegular,
-    fontSize: sizes.width * 0.045,
+    fontSize: sizes.width * 0.044,
     width: sizes.width * 0.76,
   },
   texinput1: {
@@ -80,5 +83,6 @@ const styles = StyleSheet.create({
     color: colors.colorText,
     fontFamily: fonts.textRegular,
     fontSize: sizes.width * 0.045,
+    textAlignVertical: 'top',
   },
 });

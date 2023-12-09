@@ -27,4 +27,5 @@ interface Departments {
     event_id: number;
     department_id: number;
   };
+  isChecked: boolean;
 }

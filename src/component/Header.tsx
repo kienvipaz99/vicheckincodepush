@@ -136,7 +136,7 @@ export default class Header extends Component<Props, State> {
                     name="pluscircle"
                     color={'white'}
                     size={25}
-                    style={{position: 'absolute', right: 10}}
+                    style={{right: 10}}
                   />
                 )}
                 {chitiet && (

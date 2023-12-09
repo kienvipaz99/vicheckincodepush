@@ -12,7 +12,6 @@ import {FlatList} from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../res/color';
 import {useGetdepartmentsQuery} from '../../redux/api/auth.api';
-import {ActivityIndicator} from 'react-native';
 import fonts from '../../res/fonts';
 interface Props {
   isShow: boolean;
@@ -20,44 +19,56 @@ interface Props {
   select?: any;
   item?: string[] | undefined;
   name: string;
+  selected: any;
 }
 const ModalMuntiselectPhongBan = (props: Props) => {
   const {data} = useGetdepartmentsQuery('');
 
   const [datas, setDatas] = useState<any>();
   useEffect(() => {
-    let temp = data?.data.map((item: any) => {
-      return {...item, isChecked: false};
+    let temp = data?.data.map((item: Departments) => {
+      const isIdMatch = props.selected?.some(
+        (selectedItem: Departments) => selectedItem?.id === item?.id,
+      );
+
+      return {...item, isChecked: isIdMatch ? isIdMatch : false};
     });
+
     setDatas(temp);
   }, [data]);
-  const handleChange = (val: any) => {
-    let temp = datas.map((item: any) => {
-      if (val === item.id) {
+  const handleChange = (val: number) => {
+    let temp = datas.map((item: Departments) => {
+      if (val === item?.id) {
         return {...item, isChecked: !item.isChecked};
       }
       return item;
     });
     setDatas(temp);
   };
-  let selected = datas?.filter((product: any) => product?.isChecked);
+  let selected = datas
+    ?.filter((product: Departments) => product?.isChecked)
+    .map((selectedItem: Departments) => ({
+      id: selectedItem.id,
+      name: selectedItem.name,
+    }));
+
   const luu = () => {
     props.select(selected);
     props.toggleDate();
   };
 
-  const renderitem = ({item, index}: any) => {
+  const renderitem = ({item}: {item: Departments}) => {
     return (
       <TouchableOpacity
         style={styles.view}
         activeOpacity={1}
         onPress={() => {
-          handleChange(item.id);
+          handleChange(item?.id);
         }}>
         <MaterialCommunityIcons
           size={25}
-          name={item.isChecked === false ? 'check-circle-outline' : 'check-circle'}
-          color={item.isChecked === false ? colors.colorDargrey : 'red'}
+          name={item?.isChecked === false ? 'check-circle-outline' : 'check-circle'}
+          color={item?.isChecked === false ? colors.colorDargrey : 'red'}
         />
         <Text style={styles.txt1}>{item?.name}</Text>
       </TouchableOpacity>
@@ -146,6 +157,7 @@ const styles = StyleSheet.create({
     marginTop: sizes._15sdp,
     borderRadius: 10,
     height: sizes._40sdp,
+    paddingHorizontal: 10,
   },
   view1: {
     width: sizes._screen_width * 0.75,

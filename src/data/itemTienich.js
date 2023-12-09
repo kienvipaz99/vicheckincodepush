@@ -10,7 +10,6 @@ const itemTienich = [
   },
   {
     id: 2,
-
     image: images.truyenthong,
     navigation: 'News',
     check: 0,

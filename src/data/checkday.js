@@ -22,6 +22,19 @@ export function fullday1(val) {
   let day = yyyy + '-' + mm + '-' + d;
   return day;
 }
+export function dayMonth(val) {
+  let a = new Date(val);
+  let d = a.getDate();
+  let mm = String(a.getMonth() + 1); //January is 0!
+  let day = d + '/' + mm;
+  return day;
+}
+export function consvertThangNam(val) {
+  let date = new Date(val);
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  return {year: year, month: month};
+}
 export function checkTime(val) {
   let a = new Date(val).getHours();
   let b = new Date(val).getMinutes();

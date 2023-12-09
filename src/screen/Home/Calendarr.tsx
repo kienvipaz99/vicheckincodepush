@@ -20,16 +20,12 @@ const Calendarr = (props: Props) => {
         onPressTaoLichHop={() => props.navigation.navigate('TaoLichHop')}
       />
       <View style={styles.contentContainer}>
-        <View style={styles.view}>
-          <DateWord navigation={props.navigation} />
-        </View>
+        <DateWord navigation={props.navigation} />
       </View>
     </View>
   );
 };
-
 export default Calendarr;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

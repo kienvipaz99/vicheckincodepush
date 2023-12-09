@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import fonts from '../res/fonts';
 import sizes from '../res/sizes';
 import {authApi, useLogoutMutation} from '../redux/api/auth.api';
@@ -13,7 +13,7 @@ interface RenderItemTrangChuProps {
   navigation: NavigationProp<Record<string, any>>;
 }
 const RenderItemTrangChu = (props: RenderItemTrangChuProps) => {
-  const [logotbtn, {isLoading}] = useLogoutMutation();
+  const [logotbtn] = useLogoutMutation();
   const dispatch = useDispatch();
   const logout = async () => {
     try {
@@ -26,7 +26,10 @@ const RenderItemTrangChu = (props: RenderItemTrangChuProps) => {
       );
       dispatch(authApi.util.resetApiState());
       resetAxiosInterceptors();
-      props.navigation.navigate('Login');
+      props.navigation.reset({
+        index: 0,
+        routes: [{name: 'Login'}],
+      });
     } catch (error) {
       console.log(error);
     }

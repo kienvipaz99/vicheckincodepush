@@ -43,7 +43,6 @@ const TopTabQuenChamCongAdmin = ({
         return (
           <RequestChamcong data={data?.data} status="yêu cầu" navigation={navigation} duyetdon />
         );
-
       case 'tuchoi1':
         return <RequestChamcong data={dataReject?.data} status="từ chối" navigation={navigation} />;
       default:

@@ -52,6 +52,7 @@ const XinNghiPhep = (props: XinNghiPhepProps) => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const id = useAppSelect(data => data?.infoUser?.id);
   const [submitonleave, {isLoading}] = useCreateonleaveMutation();
+  console.log(phep?.id);
 
   const check = async () => {
     try {
@@ -82,6 +83,7 @@ const XinNghiPhep = (props: XinNghiPhepProps) => {
       );
     } catch (error: any) {
       const err = error?.data?.errors;
+      console.log(error);
 
       if (error?.status == 403) {
         Alert.alert(error?.data?.message);

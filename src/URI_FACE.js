@@ -8,3 +8,4 @@ export const config = {
 };
 export const APIMAPS = 'https://rsapi.goong.io/Place';
 export const KEYMAP = '135tTY1304S57cmP3f7msCpH9Bcw3pnqGfpeUbDW';
+export const API_LOCAL = 'http://localhost:8000/api/v1';

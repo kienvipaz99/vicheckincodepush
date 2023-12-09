@@ -63,9 +63,15 @@ const Login = ({navigation}: {navigation: NavigationProp<Record<string, any>>}) 
         const roles = dataa?.roles[0];
         dispatch(RoleUser(roles?.id));
         if (roles?.id === 1 || roles?.id === 2) {
-          navigation.navigate('ButtonTabBarAdmin');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'ButtonTabBarAdmin'}],
+          });
         } else {
-          navigation.navigate('Home1');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Home1'}],
+          });
         }
       }
     } catch (error) {

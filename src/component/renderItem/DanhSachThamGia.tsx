@@ -13,7 +13,7 @@ const DanhSachThamGia = (props: DanhSachThamGiaProps) => {
   return (
     <View style={styles.item} key={props.index}>
       <View style={styles.item2} />
-      <Text style={styles.txt}>{props.item.name}</Text>
+      <Text style={styles.txt}>{props.item?.name}</Text>
     </View>
   );
 };

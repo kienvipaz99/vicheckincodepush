@@ -1,23 +1,23 @@
-import * as React from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import fonts from '../res/fonts';
 import images from '../res/images';
 import sizes from '../res/sizes';
 import stylescustom from '../res/stylescustom';
 import Header from './Header';
-import {fullday} from '../data/checkday';
-import colors from '../res/color';
+import {consvertTime, fullday} from '../data/checkday';
 import {FlatList} from 'react-native-gesture-handler';
 import DanhSachThamGia from './renderItem/DanhSachThamGia';
 import {NavigationProp} from '@react-navigation/native';
+import colors from '../res/color';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import DowLoadfileMeeting from '../screen/meetings/DowLoadfileMeeting';
 interface ChiTietLichHopProps {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
-
 const ChiTietLichHop = (props: ChiTietLichHopProps) => {
-  let a = props.route?.params?.item;
-
+  let a = props.route?.params?.item as RoomMeeting;
   return (
     <View style={stylescustom.container}>
       <Header
@@ -35,19 +35,17 @@ const ChiTietLichHop = (props: ChiTietLichHopProps) => {
                 styles.txt3,
                 {
                   color:
-                    a.mucdo == 'Quan trọng'
+                    a?.level == 'important'
                       ? '#CC5F00'
-                      : a.mucdo == 'Bình thường'
+                      : a?.level == 'normal'
                       ? '#020202'
-                      : a.mucdo == 'Đặc biệt quan trọng'
-                      ? '#4109DF'
                       : undefined,
                 },
               ]}>
-              {a.mucdo}
+              {a?.level == 'important' ? 'Quan trọng' : a?.level == 'normal' ? 'Bình thường' : null}
             </Text>
           </View>
-          <Text style={styles.txt3}>{a.content}</Text>
+          <Text style={[styles.txt3, {marginTop: 10}]}>{a?.title}</Text>
           <View style={styles.item3}>
             <View style={styles.item2}>
               <View style={styles.img}>
@@ -56,24 +54,49 @@ const ChiTietLichHop = (props: ChiTietLichHopProps) => {
               <View style={{marginLeft: 10}}>
                 <Text style={styles.txt3}>Thời gian</Text>
                 <View style={styles.item2}>
-                  <Text style={styles.txt3}>{fullday(a.day)}</Text>
-                  <Text style={[styles.txt3, {marginLeft: 15}]}>{a.time}</Text>
+                  <Text style={styles.txt3}>{fullday(a?.day)}</Text>
+                  <Text style={[styles.txt3, {marginLeft: 15}]}>
+                    {consvertTime(a?.time_start)}-{consvertTime(a?.time_end)}
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.gach} />
-            <View style={styles.item2}>
-              <View style={styles.img}>
-                <Image source={images.phonghop} />
-              </View>
-              <View style={{marginLeft: 10}}>
-                <Text style={styles.txt3}>Phòng họp</Text>
+            {a?.room?.name && (
+              <>
                 <View style={styles.item2}>
-                  <Text style={styles.txt3}>{a.title}</Text>
+                  <View style={styles.img}>
+                    <Image source={images.phonghop} />
+                  </View>
+                  <View style={{marginLeft: 10}}>
+                    <Text style={styles.txt3}>Phòng họp</Text>
+                    <View style={styles.item2}>
+                      <Text style={styles.txt3}>{a?.room?.name}</Text>
+                    </View>
+                  </View>
                 </View>
-              </View>
-            </View>
-            <View style={styles.gach} />
+                <View style={styles.gach} />
+              </>
+            )}
+            {a?.link && (
+              <>
+                <View style={styles.item2}>
+                  <MaterialCommunityIcons
+                    size={30}
+                    color={colors.colorDargrey}
+                    name="link"
+                    style={{marginLeft: 5}}
+                  />
+                  <View style={{marginLeft: 7}}>
+                    <Text style={styles.txt3}>Link phòng họp</Text>
+                    <View style={styles.item2}>
+                      <Text style={styles.txt3}>{a?.link}</Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.gach} />
+              </>
+            )}
             <View style={styles.item2}>
               <View style={styles.img}>
                 <Image source={images.chutri} />
@@ -82,7 +105,7 @@ const ChiTietLichHop = (props: ChiTietLichHopProps) => {
                 <Text style={styles.txt3}>Chủ trì</Text>
                 <View style={styles.item2}>
                   <Text style={[styles.txt3, {color: 'black', fontFamily: fonts.textRegular}]}>
-                    {a.nguoitruchi}
+                    {a?.host}
                   </Text>
                 </View>
               </View>
@@ -92,16 +115,24 @@ const ChiTietLichHop = (props: ChiTietLichHopProps) => {
               <View style={{marginLeft: 10}}>
                 <Text style={styles.txt3}>Nội dung</Text>
                 <View style={styles.item2}>
-                  <Text style={styles.txt3}>{a.content}</Text>
+                  <Text style={styles.txt3}>{a?.content}</Text>
                 </View>
               </View>
             </View>
           </View>
           <View style={{marginTop: sizes._20sdp}}>
-            <Text style={styles.txt3}>Thành viên ({a.thanhvien.length})</Text>
+            <View>
+              <Text style={styles.txt3}>File cuộc họp</Text>
+              {a?.slice_content?.map((item, index) => {
+                return <DowLoadfileMeeting item={item} index={index} />;
+              })}
+            </View>
+            <Text style={[styles.txt3, {marginTop: 20}]}>
+              Thành viên ({a?.members?.length ? a?.members?.length : '0'})
+            </Text>
             <FlatList
               scrollEnabled={false}
-              data={a.thanhvien}
+              data={a?.members}
               numColumns={2}
               renderItem={({item, index}) => {
                 return <DanhSachThamGia item={item} index={index} />;
@@ -118,20 +149,19 @@ export default ChiTietLichHop;
 
 const styles = StyleSheet.create({
   txt1: {
-    color: '#6C6A6A',
+    color: colors.colorText,
     fontFamily: fonts.textBold,
-    fontSize: sizes._font_size_big,
+    fontSize: sizes.width * 0.045,
   },
 
   txt3: {
-    color: '#6C6A6A',
+    color: colors.colorText,
     fontFamily: fonts.textRegular,
-    fontSize: sizes._font_size_big_big,
+    fontSize: sizes.width * 0.045,
   },
 
   item: {
     width: '90%',
-
     marginTop: sizes._20sdp,
   },
   item1: {
@@ -148,9 +178,9 @@ const styles = StyleSheet.create({
   item3: {
     marginTop: sizes._20sdp,
     padding: 10,
-    elevation: 3,
     borderRadius: 10,
     backgroundColor: 'white',
+    ...stylescustom.shadowitem,
   },
   gach: {
     height: 1,

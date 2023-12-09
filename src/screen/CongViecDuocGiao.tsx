@@ -2,7 +2,7 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Header from '../component/Header';
 import stylescustom from '../res/stylescustom';
-import {Calendar, DateData} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import sizes from '../res/sizes';
 import fonts from '../res/fonts';

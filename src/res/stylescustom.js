@@ -6,8 +6,9 @@ export default stylescustom = StyleSheet.create({
   contentContainer: {
     flex: 1,
     marginTop: sizes._20sdp,
-    width: sizes._screen_width,
     backgroundColor: colors.colorWhite,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     alignItems: 'center',
   },
   container: {
@@ -18,8 +19,6 @@ export default stylescustom = StyleSheet.create({
   contentContainer1: {
     flex: 1,
     marginTop: sizes._20sdp,
-    width: '100%',
-    height: '100%',
     alignItems: 'center',
   },
   err: {

@@ -18,12 +18,10 @@ const App = () => {
 
   async function getNotifi() {
     messaging().onMessage(async remoteMessage => {
-      console.log('Notification received in foreground:', remoteMessage);
       setNotification(remoteMessage.notification);
     });
   }
   messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background!', remoteMessage);
     Alert.alert('BACKGROUND', JSON.stringify(remoteMessage));
   });
   const handleCloseModal = () => {

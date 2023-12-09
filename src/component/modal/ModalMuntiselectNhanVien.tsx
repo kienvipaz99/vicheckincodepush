@@ -15,19 +15,21 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import axios from 'axios';
 import URI from '../../URI';
 import fonts from '../../res/fonts';
+import TextInputcustom from '../TextInputcustom';
 interface Props {
   isShow: boolean;
   toggleDate: () => void;
   select?: any;
   name: string;
   search?: boolean;
+  selected?: any;
 }
 const ModalMuntiselectNhanVien = (props: Props) => {
   const useAppSelect: TypedUseSelectorHook<any> = useSelector;
-  const key: string = useAppSelect(data => data.keytoken.key);
-  const [data, setData] = useState<any>();
+  const key = useAppSelect(data => data.keytoken.key);
+  const [data, setData] = useState<User[]>();
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectID, setSelectID] = useState<any>([]);
+  const [datas, setDatas] = useState<User[]>();
   const getdata = async () => {
     const config = {
       headers: {
@@ -45,17 +47,30 @@ const ModalMuntiselectNhanVien = (props: Props) => {
   useEffect(() => {
     getdata();
   }, [searchQuery]);
-  const Selects = (val: any) => {
-    setSelectID((prevSelectID: any) => {
-      if (prevSelectID.includes(val)) {
-        return prevSelectID.filter((id: any) => id !== val);
-      } else {
-        return [...prevSelectID, val];
-      }
+  useEffect(() => {
+    let temp = data?.map((item: User) => {
+      const isIdMatch = props.selected?.some((selectedItem: number) => selectedItem === item?.id);
+
+      return {...item, isChecked: isIdMatch ? isIdMatch : false};
     });
+
+    setDatas(temp);
+  }, [data]);
+  const handleChange = (val: number) => {
+    let temp = datas?.map((item: User) => {
+      if (val === item?.id) {
+        return {...item, isChecked: !item.isChecked};
+      }
+      return item;
+    });
+    setDatas(temp);
   };
+  let selected = datas
+    ?.filter((product: User) => product?.isChecked)
+    .map((selectedItem: User) => selectedItem.id);
+
   const luu = () => {
-    props.select(selectID);
+    props.select(selected);
     props.toggleDate();
   };
   const renderitem = ({item, index}: any) => {
@@ -72,13 +87,13 @@ const ModalMuntiselectNhanVien = (props: Props) => {
         }}
         activeOpacity={1}
         onPress={() => {
-          Selects(item.id);
+          handleChange(item.id);
         }}>
         <MaterialCommunityIcons
           style={{marginLeft: 15}}
           size={25}
-          name={selectID.includes(item.id) ? 'check-circle' : 'check-circle-outline'}
-          color={selectID.includes(item.id) ? 'red' : colors.colorDargrey}
+          name={item?.isChecked === false ? 'check-circle-outline' : 'check-circle'}
+          color={item?.isChecked === false ? colors.colorDargrey : 'red'}
         />
         <Text style={{marginLeft: sizes._40sdp, color: 'black'}}>{item.full_name}</Text>
       </TouchableOpacity>
@@ -103,21 +118,22 @@ const ModalMuntiselectNhanVien = (props: Props) => {
         </Text>
       </View>
 
-      <View
-        style={{
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: sizes._30sdp,
-        }}>
-        <FlatList
-          data={data}
-          renderItem={renderitem}
-          keyExtractor={(item: any) => item.id?.toString()}
-          initialNumToRender={10}
-          maxToRenderPerBatch={5}
+      <View style={{width: sizes.width * 0.7, alignSelf: 'center'}}>
+        <TextInputcustom
+          icon="find-replace"
+          value={searchQuery}
+          setValue={setSearchQuery}
+          placeholder="Tìm kiếm nhân viên"
         />
       </View>
+      <FlatList
+        data={datas}
+        renderItem={renderitem}
+        keyExtractor={(item: any) => item.id?.toString()}
+        initialNumToRender={10}
+        maxToRenderPerBatch={5}
+        contentContainerStyle={{paddingBottom: 50}}
+      />
     </View>
   );
 
@@ -153,7 +169,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: sizes._20sdp,
     position: 'absolute',
-    height: 500,
+    minHeight: 200,
+    maxHeight: 500,
   },
   instructions: {
     textAlign: 'center',
